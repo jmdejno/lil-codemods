@@ -2,6 +2,8 @@
   "name": "lil-codemods",
   "version": "0.1.0",
   "scripts": {
+    "build": "yarn clean && tsc",
+    "clean": "rm -rf build",
     "test": "codemod-cli test",
     "update-docs": "codemod-cli update-docs",
     "watch": "tsc -w"

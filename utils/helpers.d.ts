@@ -1,0 +1,15 @@
+import { emberLifecycleHooks } from "./constants";
+import { NodePath } from "recast";
+import { JSCodeshift, Property, ObjectProperty, ObjectMethod } from "jscodeshift";
+import { Collection } from "jscodeshift/src/Collection";
+export declare const lifecycleHookOrder: emberLifecycleHooks[];
+export declare function isPropertyOf(j: JSCodeshift, path: NodePath<Property | ObjectProperty | ObjectMethod>, name: string): boolean;
+export declare function isNamedObjectPropertyOf(j: JSCodeshift, path: NodePath<ObjectProperty>, propName: string, objName: string): boolean;
+export declare function isObjectWithFunctionValue(j: JSCodeshift, path: NodePath<ObjectProperty>): boolean;
+export declare function getObjectPropertyValueName(j: JSCodeshift, path: NodePath<ObjectProperty>): string;
+export declare function isMultilineProperty(j: JSCodeshift, path: NodePath<ObjectProperty>): boolean;
+export declare function isSingleLineProperty(j: JSCodeshift, path: NodePath<ObjectProperty>): boolean;
+export declare function findObjectPropsBy(j: JSCodeshift, obj: Collection<any>, filter: (j: JSCodeshift, value: NodePath<ObjectProperty>) => boolean, objName?: string): Collection<import("ast-types/gen/nodes").ObjectProperty>;
+export declare function isPrivateProperty(j: JSCodeshift, path: NodePath<Property | ObjectProperty | ObjectMethod>): boolean;
+export declare function getNodes(...paths: Collection<any>[]): any[];
+export declare function insertLineBeforeObjectProps(j: JSCodeshift, ...collections: Collection<ObjectMethod | ObjectProperty>[]): void;

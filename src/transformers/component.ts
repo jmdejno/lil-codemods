@@ -247,10 +247,6 @@ export = class Component {
       publicMethods,
       privateMethods
     );
-    console.log(
-      // @ts-ignore
-      Array.from(this._foundObjectProps).map(node => (node.key || {}).name)
-    );
   }
 
   private _addToFoundObjectProps(

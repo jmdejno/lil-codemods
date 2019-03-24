@@ -7,7 +7,7 @@ export enum emberLifecycleHooks {
   DID_RENDER = "didRender",
   DID_UPDATE_ATTRS = "didUpdateAttrs",
   WILL_UPDATE = "willUpdate",
-  WILL_DESTORY = "willDestory",
+  WILL_DESTORY = "willDestroy",
   WILL_DESTROY_ELEMENT = "willDestroyElement",
   WILL_CLEAR_RENDER = "willClearRender",
   DID_DESTROY_ELEMENT = "didDestroyElement",

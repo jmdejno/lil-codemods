@@ -1,6 +1,6 @@
 const { getParser } = require("codemod-cli").jscodeshift;
 // const { getOptions } = require("codemod-cli");
-const Component = require("../../transformers/component");
+const Component = require("../../build/transformers/component");
 
 module.exports = function transformer(file, api) {
   const j = getParser(api);
