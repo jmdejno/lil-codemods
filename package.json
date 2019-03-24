@@ -6,19 +6,29 @@
     "clean": "rm -rf build",
     "test": "codemod-cli test",
     "update-docs": "codemod-cli update-docs",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "dryrun": "jscodeshift -d -p -t "
   },
-  "bin": "./bin/cli.js",
+  "bin": "./build/bin/cli.js",
   "keywords": [
     "codemod-cli"
   ],
   "dependencies": {
+    "chalk": "^2.4.2",
     "codemod-cli": "^0.2.10",
+    "fs-extra": "^7.0.1",
+    "inquirer": "^6.2.2",
+    "inquirer-path": "^1.0.0-beta5",
     "jscodeshift": "^0.6.3",
-    "recast": "^0.17.4"
+    "recast": "^0.17.4",
+    "yargs": "^13.2.2"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/fs-extra": "^5.0.5",
+    "@types/inquirer": "^6.0.0",
     "@types/jscodeshift": "^0.6.0",
+    "@types/yargs": "^12.0.10",
     "jest": "^24.1.0"
   },
   "jest": {

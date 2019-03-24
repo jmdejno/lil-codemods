@@ -8,5 +8,5 @@ module.exports = function transformer(file, api) {
   const root = j(file.source);
   const component = Component.build(j, root);
   component.reorder();
-  return root.toSource();
+  return root.toSource({ quote: "single" });
 };
