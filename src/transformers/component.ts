@@ -1,6 +1,5 @@
-import { JSCodeshift, ObjectProperty, ObjectMethod, File } from "jscodeshift";
+import { JSCodeshift, ObjectProperty, ObjectMethod, File, ASTPath } from "jscodeshift";
 import { Collection } from "jscodeshift/src/Collection";
-import { NodePath } from "recast";
 import {
   emberComponentProps,
   emberLifecycleHooks,
@@ -27,7 +26,7 @@ export = class Component {
 
   public static isEmberComponentProp(
     j: JSCodeshift,
-    path: NodePath<ObjectProperty>
+    path: ASTPath<ObjectProperty>
   ) {
     const { node } = path;
     const key = node && j.Identifier.check(node.key) && node.key;
@@ -43,7 +42,7 @@ export = class Component {
 
   public static isEmberLifecycleHook(
     j: JSCodeshift,
-    path: NodePath<ObjectProperty | ObjectMethod>
+    path: ASTPath<ObjectProperty | ObjectMethod>
   ): boolean {
     const { node } = path;
     const key = node && j.Identifier.check(node.key) && node.key;
@@ -59,7 +58,7 @@ export = class Component {
 
   public static isComponentObjectProperty(
     j: JSCodeshift,
-    path: NodePath<ObjectProperty | ObjectMethod>
+    path: ASTPath<ObjectProperty | ObjectMethod>
   ): boolean {
     return isPropertyOf(j, path, emberObjectTypes.COMPONENT);
   }

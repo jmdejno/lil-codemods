@@ -2,20 +2,20 @@ import {
   emberMultiLineObjectMethods,
   emberSingleLineObjectMethods
 } from "./constants";
-import { NodePath } from "recast";
 import {
   JSCodeshift,
   Property,
   Identifier,
   ObjectProperty,
   CallExpression,
-  ObjectMethod
+  ObjectMethod,
+  ASTPath
 } from "jscodeshift";
 import { Collection } from "jscodeshift/src/Collection";
 
 export function isPropertyOf(
   j: JSCodeshift,
-  path: NodePath<Property | ObjectProperty | ObjectMethod>,
+  path: ASTPath<Property | ObjectProperty | ObjectMethod>,
   name: string
 ): boolean {
   if (j.ObjectProperty.check(path.node) || j.ObjectMethod.check(path.node)) {
@@ -33,7 +33,7 @@ export function isPropertyOf(
 
 export function isNamedObjectPropertyOf(
   j: JSCodeshift,
-  path: NodePath<ObjectProperty>,
+  path: ASTPath<ObjectProperty>,
   propName: string,
   objName: string
 ) {
@@ -49,7 +49,7 @@ export function isNamedObjectPropertyOf(
 
 export function isObjectWithFunctionValue(
   j: JSCodeshift,
-  path: NodePath<ObjectProperty>
+  path: ASTPath<ObjectProperty>
 ) {
   const { node } = path;
   return j.ObjectProperty.check(node) && j.CallExpression.check(node.value);
@@ -57,7 +57,7 @@ export function isObjectWithFunctionValue(
 
 export function getObjectPropertyValueName(
   j: JSCodeshift,
-  path: NodePath<ObjectProperty>
+  path: ASTPath<ObjectProperty>
 ) {
   const { node } = path;
   const callExpression =
@@ -73,7 +73,7 @@ export function getObjectPropertyValueName(
 
 export function isMultilineProperty(
   j: JSCodeshift,
-  path: NodePath<ObjectProperty>
+  path: ASTPath<ObjectProperty>
 ): boolean {
   const funcName = getObjectPropertyValueName(j, path);
   return (
@@ -86,7 +86,7 @@ export function isMultilineProperty(
 
 export function isSingleLineProperty(
   j: JSCodeshift,
-  path: NodePath<ObjectProperty>
+  path: ASTPath<ObjectProperty>
 ): boolean {
   const funcName = getObjectPropertyValueName(j, path);
   return Object.values(emberSingleLineObjectMethods).some(
@@ -97,7 +97,7 @@ export function isSingleLineProperty(
 export function findObjectPropsBy(
   j: JSCodeshift,
   obj: Collection<any>,
-  filter: (j: JSCodeshift, value: NodePath<ObjectProperty>) => boolean,
+  filter: (j: JSCodeshift, value: ASTPath<ObjectProperty>) => boolean,
   objName?: string
 ) {
   return obj
@@ -109,7 +109,7 @@ export function findObjectPropsBy(
 
 export function isPrivateProperty(
   j: JSCodeshift,
-  path: NodePath<Property | ObjectProperty | ObjectMethod>
+  path: ASTPath<Property | ObjectProperty | ObjectMethod>
 ): boolean {
   const { node } = path;
   const id = node && j.Identifier.check(node.key) && (node.key as Identifier);
