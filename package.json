@@ -3,16 +3,20 @@
   "version": "0.1.0",
   "scripts": {
     "test": "codemod-cli test",
-    "update-docs": "codemod-cli update-docs"
+    "update-docs": "codemod-cli update-docs",
+    "watch": "tsc -w"
   },
   "bin": "./bin/cli.js",
   "keywords": [
     "codemod-cli"
   ],
   "dependencies": {
-    "codemod-cli": "^0.2.10"
+    "codemod-cli": "^0.2.10",
+    "jscodeshift": "^0.6.3",
+    "recast": "^0.17.4"
   },
   "devDependencies": {
+    "@types/jscodeshift": "^0.6.0",
     "jest": "^24.1.0"
   },
   "jest": {
