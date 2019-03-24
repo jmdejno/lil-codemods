@@ -25,9 +25,9 @@ export default Component.extend({
     this._super(...arguments);
   },
 
+  _privateMulti: computed("single", function multi() {}).readOnly(),
   publicMulti: computed("single", function multi() {}).readOnly(),
 
-  _privateMulti: computed("single", function multi() {}).readOnly(),
 
   service: service()
 });

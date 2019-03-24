@@ -1,5 +1,4 @@
 import {
-  emberLifecycleHooks,
   emberMultiLineObjectMethods,
   emberSingleLineObjectMethods
 } from "./constants";
@@ -13,22 +12,6 @@ import {
   ObjectMethod
 } from "jscodeshift";
 import { Collection } from "jscodeshift/src/Collection";
-
-export const lifecycleHookOrder: emberLifecycleHooks[] = [
-  emberLifecycleHooks.INIT,
-  emberLifecycleHooks.SETUP_CONTROLLER,
-  emberLifecycleHooks.DID_RECIECE_ATTRS,
-  emberLifecycleHooks.WILL_RENDER,
-  emberLifecycleHooks.DID_INSERT_ELEMENT,
-  emberLifecycleHooks.DID_RENDER,
-  emberLifecycleHooks.DID_UPDATE_ATTRS,
-  emberLifecycleHooks.WILL_UPDATE,
-  emberLifecycleHooks.WILL_DESTORY,
-  emberLifecycleHooks.WILL_DESTROY_ELEMENT,
-  emberLifecycleHooks.WILL_CLEAR_RENDER,
-  emberLifecycleHooks.DID_DESTROY_ELEMENT,
-  emberLifecycleHooks.RESET_CONTROLLER
-];
 
 export function isPropertyOf(
   j: JSCodeshift,
@@ -131,19 +114,4 @@ export function isPrivateProperty(
   const { node } = path;
   const id = node && j.Identifier.check(node.key) && (node.key as Identifier);
   return !!(id && id.name && id.name.startsWith("_"));
-}
-
-export function getNodes(...paths: Collection<any>[]) {
-  return paths.reduce((nodes: any[], path) => {
-    return nodes.concat(path.nodes());
-  }, []);
-}
-
-export function insertLineBeforeObjectProps(
-  j: JSCodeshift,
-  ...collections: Collection<ObjectMethod | ObjectProperty>[]
-) {
-  collections.forEach(collection => {
-    const ids = collection.find(j.Identifier);
-  });
 }

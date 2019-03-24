@@ -4,7 +4,8 @@ import { NodePath } from "recast";
 import {
   emberComponentProps,
   emberLifecycleHooks,
-  emberObjectTypes
+  emberObjectTypes,
+  lifecycleHookOrder
 } from "../utils/constants";
 import {
   isPrivateProperty,
@@ -12,9 +13,9 @@ import {
   isNamedObjectPropertyOf,
   isSingleLineProperty,
   findObjectPropsBy,
-  isMultilineProperty,
-  getNodes
+  isMultilineProperty
 } from "../utils/helpers";
+import { sortNodesByAccessLevel, sortNodesByArray } from "../utils/sort";
 
 export = class Component {
   //#region public statics
@@ -182,23 +183,22 @@ export = class Component {
     }
     const j = Component.jscodeshift;
     const originalObj = this._component.get("declaration", "arguments", 0);
-    const props = [
-      this._services,
-      this._emberProps,
-      this._publicProps,
-      this._privateProps,
-      this._singleLineComputedProps,
-      this._mutliLineComputeProps,
-      this._lifecycleHooksProps,
-      this._lifecycleHooksMethods,
-      this._actions,
-      this._publicMethods,
-      this._privateMethods
+    const nodes = [
+      ...this._services.nodes(),
+      ...this._emberProps.nodes(),
+      ...this._publicProps.nodes(),
+      ...this._privateProps.nodes(),
+      ...sortNodesByAccessLevel(this._singleLineComputedProps.nodes(), node => node.key.name),
+      ...sortNodesByAccessLevel(this._mutliLineComputeProps.nodes(), node => node.key.name),
+      ...sortNodesByArray(this._lifecycleHooksProps.nodes(), node => node.key.name, lifecycleHookOrder),
+      ...sortNodesByArray(this._lifecycleHooksMethods.nodes(), node => node.key.name, lifecycleHookOrder),
+      ...this._actions.nodes(),
+      ...this._publicMethods.nodes(),
+      ...this._privateMethods.nodes()
     ];
-    const obj = j.objectExpression(getNodes(...props));
+    const obj = j.objectExpression(nodes);
     originalObj.replace(obj);
 
-    // insertLineBeforeObjectProps(j, ...props);
   }
 
   private _findObjectProps(component: Collection<any>) {

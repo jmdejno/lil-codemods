@@ -64,3 +64,23 @@ export enum emberSingleLineObjectMethods {
   UNIQ = "uniq",
   UNIQ_BY = "uniqBy"
 }
+
+
+/**
+ * Preferred order of lifecycle hooks
+ */
+export const lifecycleHookOrder: emberLifecycleHooks[] = [
+  emberLifecycleHooks.INIT,
+  emberLifecycleHooks.SETUP_CONTROLLER,
+  emberLifecycleHooks.DID_RECIECE_ATTRS,
+  emberLifecycleHooks.WILL_RENDER,
+  emberLifecycleHooks.DID_INSERT_ELEMENT,
+  emberLifecycleHooks.DID_RENDER,
+  emberLifecycleHooks.DID_UPDATE_ATTRS,
+  emberLifecycleHooks.WILL_UPDATE,
+  emberLifecycleHooks.WILL_DESTORY,
+  emberLifecycleHooks.WILL_DESTROY_ELEMENT,
+  emberLifecycleHooks.WILL_CLEAR_RENDER,
+  emberLifecycleHooks.DID_DESTROY_ELEMENT,
+  emberLifecycleHooks.RESET_CONTROLLER
+];

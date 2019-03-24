@@ -4,15 +4,16 @@ import { equal } from "@ember/object/computed";
 
 export default Component.extend({
   service: service(),
-  _privateSingle: equal("bool").readOnly(),
   publicSingle: equal("bool").readOnly(),
+  _privateSingle: equal("bool").readOnly(),
   publicMulti: computed("single", function multi() {}).readOnly(),
   _privateMulti: computed("single", function multi() {}).readOnly(),
-  willDestroy() {},
 
   init() {
     this._super(...arguments);
   },
+
+  willDestroy() {},
 
   actions: {
     action1() {},
