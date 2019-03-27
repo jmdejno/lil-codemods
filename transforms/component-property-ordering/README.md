@@ -1,5 +1,63 @@
 # component-property-ordering
 
+Transform `component` property ordering to follow `eslint` rules for [order-in-components](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/order-in-components.md). 
+
+### Example:
+
+```js
+const { Component, computed, inject: { service } } = Ember;
+const { alias } = computed;
+
+export default Component.extend({
+  // 1. Services
+  i18n: service(),
+
+  // 2. Properties
+  role: 'sloth',
+
+  // 3. Empty methods
+  onRoleChange() {},
+
+  // 4. Single line Computed Property
+  vehicle: alias('car'),
+
+  // 5. Multiline Computed Property
+  levelOfHappiness: computed('attitude', 'health', function() {
+    const result = this.get('attitude') * this.get('health') * Math.random();
+    return result;
+  }),
+
+  // 6. Observers
+  onVehicleChange: observer('vehicle', function() {
+    // observer logic
+  }),
+
+  // 7. Lifecycle Hooks
+  init() {
+    // custom init logic
+  },
+
+  didInsertElement() {
+    // custom didInsertElement logic
+  },
+
+  willDestroyElement() {
+    // custom willDestroyElement logic
+  },
+
+  // 8. All actions
+  actions: {
+    sneakyAction() {
+      return this._secretMethod();
+    }
+  },
+
+  // 9. Custom / private methods
+  _secretMethod() {
+    // custom secret method logic
+  }
+});
+```
 
 ## Usage
 
