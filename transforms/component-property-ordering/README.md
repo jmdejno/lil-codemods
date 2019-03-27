@@ -62,12 +62,12 @@ export default Component.extend({
 ## Usage
 
 ```
-npx lil-codemods component-property-ordering path/of/files/ or/some**/*glob.js
+npx lil-codemods run component-property-ordering path/of/files/ or/some**/*glob.js
 
 # or
 
 yarn global add lil-codemods
-lil-codemods component-property-ordering path/of/files/ or/some**/*glob.js
+lil-codemods run component-property-ordering path/of/files/ or/some**/*glob.js
 ```
 
 ## Input / Output

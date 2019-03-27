@@ -8,12 +8,12 @@ import { getProperties } from "@ember/object/computed";
 ## Usage
 
 ```
-npx lil-codemods get-properties path/of/files/ or/some**/*glob.js
+npx lil-codemods run get-properties path/of/files/ or/some**/*glob.js
 
 # or
 
 yarn global add lil-codemods
-lil-codemods get-properties path/of/files/ or/some**/*glob.js
+lil-codemods run get-properties path/of/files/ or/some**/*glob.js
 ```
 
 ## Input / Output

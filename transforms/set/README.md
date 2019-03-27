@@ -8,12 +8,12 @@ import { set } from "@ember/object/computed";
 ## Usage
 
 ```
-npx lil-codemods set path/of/files/ or/some**/*glob.js
+npx lil-codemods run set path/of/files/ or/some**/*glob.js
 
 # or
 
 yarn global add lil-codemods
-lil-codemods set path/of/files/ or/some**/*glob.js
+lil-codemods run set path/of/files/ or/some**/*glob.js
 ```
 
 ## Input / Output
