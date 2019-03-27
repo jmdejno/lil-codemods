@@ -2,14 +2,14 @@
   "name": "lil-codemods",
   "version": "0.1.0",
   "scripts": {
-    "build": "yarn clean && tsc",
-    "clean": "rm -rf build",
+    "build": "yarn clean && tsc && chmod -R 775 ./dist/bin",
+    "clean": "rm -rf dist",
     "test": "codemod-cli test",
     "update-docs": "codemod-cli update-docs",
     "watch": "tsc -w",
     "dryrun": "jscodeshift -d -p -t "
   },
-  "bin": "./build/bin/cli.js",
+  "bin": "./dist/bin/cli.js",
   "keywords": [
     "codemod-cli"
   ],
