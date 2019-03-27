@@ -8,12 +8,12 @@ A collection of codemod's for lil-codemods.
 To run a specific codemod from this project, you would run the following:
 
 ```
-npx lil-codemods run [TRANSFORM NAME] path/of/files/ or/some**/*glob.js
+npx lil-codemods run
 
 # or
 
 yarn global add lil-codemods
-lil-codemods run [TRANSFORM NAME] path/of/files/ or/some**/*glob.js
+lil-codemods run
 ```
 
 ## Transforms
