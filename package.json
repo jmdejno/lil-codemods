@@ -1,6 +1,6 @@
 {
   "name": "lil-codemods",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "build": "yarn clean && tsc && chmod -R 775 ./dist/bin",
     "clean": "rm -rf dist",
