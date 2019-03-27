@@ -21,6 +21,8 @@ lil-codemods <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
 <!--TRANSFORMS_START-->
 * [component-property-ordering](transforms/component-property-ordering/README.md)
 * [get](transforms/get/README.md)
+* [get-properties](transforms/get-properties/README.md)
+* [set](transforms/set/README.md)
 <!--TRANSFORMS_END-->
 
 ## Contributing
