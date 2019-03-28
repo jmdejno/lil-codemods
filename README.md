@@ -1,7 +1,6 @@
 # lil-codemods
 
-
-A collection of codemod's for lil-codemods.
+A collection of codemods for Ember.
 
 ## Usage
 
