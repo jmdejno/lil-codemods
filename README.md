@@ -21,6 +21,7 @@ lil-codemods run
 * [component-property-ordering](transforms/component-property-ordering/README.md)
 * [get](transforms/get/README.md)
 * [get-properties](transforms/get-properties/README.md)
+* [jquery](transforms/jquery/README.md)
 * [set](transforms/set/README.md)
 <!--TRANSFORMS_END-->
 
