@@ -1,8 +1,8 @@
 # get-properties
 
-Transform `this.getProperties('someProp')` to `getProperties(this, 'someProp')` and ensure import of 
-```js 
-import { getProperties } from "@ember/object/computed";
+Transform `this.getProperties('someProp')` to `getProperties(this, 'someProp')` and ensure import of
+```js
+import { getProperties } from "@ember/object";
 ```
 
 ## Usage

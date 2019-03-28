@@ -1,8 +1,8 @@
 # set
 
-Transform `this.set('someProp', value)` to `set(this, 'someProp', value)` and ensure import of 
-```js 
-import { set } from "@ember/object/computed";
+Transform `this.set('someProp', value)` to `set(this, 'someProp', value)` and ensure import of
+```js
+import { set } from "@ember/object";
 ```
 
 ## Usage

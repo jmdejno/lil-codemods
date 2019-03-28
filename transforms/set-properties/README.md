@@ -1,5 +1,9 @@
 # set-properties
 
+Transform `this.setsetProperties({'someProp': value})` to `setsetProperties(this, {'someProp': value})` and ensure import of
+```js
+import { setProperties } from "@ember/object";
+```
 
 ## Usage
 
@@ -25,8 +29,8 @@ lil-codemods set-properties path/of/files/ or/some**/*glob.js
 **Input** (<small>[basic.input.js](transforms/set-properties/__testfixtures__/basic.input.js)</small>):
 ```js
 function hello() {
-  this.setProperties("whyNot", 1);
-  this.setProperties("okay", 2);
+  this.setProperties({"whyNot": 1});
+  this.setProperties({"okay": 2});
 }
 
 ```
@@ -35,8 +39,8 @@ function hello() {
 ```js
 import { setProperties } from "@ember/object";
 function hello() {
-  setProperties(this, "whyNot", 1);
-  setProperties(this, "okay", 2);
+  setProperties(this, {"whyNot": 1});
+  setProperties(this, {"okay": 2});
 }
 
 ```

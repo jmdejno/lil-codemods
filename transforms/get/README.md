@@ -1,8 +1,8 @@
 # get
 
-Transform `this.get('someProp')` to `get(this, 'someProp')` and ensure import of 
-```js 
-import { get } from "@ember/object/computed";
+Transform `this.get('someProp')` to `get(this, 'someProp')` and ensure import of
+```js
+import { get } from "@ember/object";
 ```
 
 ## Usage
