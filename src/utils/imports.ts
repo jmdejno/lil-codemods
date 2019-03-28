@@ -11,7 +11,7 @@ export function ensureImport(
   const declaration = root.find(j.ImportDeclaration, {
     source: { value: source }
   });
-  const specifer = j.importSpecifier(j.identifier(name), local && j.identifier(local));
+  const specifer = j.importSpecifier(j.identifier(name), local ? j.identifier(local) : null);
   if (declaration.size()) {
     if (!declaration.find(j.ImportSpecifier, { imported: { name } }).size()) {
       declaration.get("specifiers").push(specifer);
