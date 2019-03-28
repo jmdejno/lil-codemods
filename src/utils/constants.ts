@@ -86,11 +86,13 @@ export const lifecycleHookOrder: emberLifecycleHooks[] = [
 
 export const jQueryToNativeDomMap = {
   find: "querySelector",
-  text: "textContent"
+  text: "textContent",
+  is: true
 }
 
 export const jQueryToNativeDomProp = {
   find: false,
-  text: true
+  text: true,
+  is: true
 }
 

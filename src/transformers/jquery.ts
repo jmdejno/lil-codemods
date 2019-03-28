@@ -1,26 +1,24 @@
-import {
-  JSCodeshift,
-  ObjectProperty,
-  ObjectMethod,
-  File,
-  ASTPath,
-  CallExpression,
-  MemberExpression
-} from "jscodeshift";
+import { JSCodeshift, File, ASTPath, CallExpression, MemberExpression } from "jscodeshift";
 import { Collection } from "jscodeshift/src/Collection";
 import {
   isThis$CallExpression,
-  getThis$ExpressionArguments,
   getThis$Expression,
-  getThis$ExpressionChainedMethodExpressions
+  getExpressionChainedMethods
 } from "../utils/jquery";
 import {
   jQueryToNativeDomMap,
   jQueryToNativeDomProp
 } from "../utils/constants";
 
+interface IJqueryTransformerOptions {
+  include: string[];
+}
+
 export = class JqueryTransformer {
-  public static transform(j: JSCodeshift, root: Collection<File>) {
+  public static transform(
+    j: JSCodeshift,
+    root: Collection<File>,
+  ) {
     this.j = j;
     return new JqueryTransformer(root);
   }
@@ -32,11 +30,18 @@ export = class JqueryTransformer {
     method: ASTPath<CallExpression>
   ) {
     const { node } = method;
-    const callee = j.MemberExpression.check(node.callee) && node.callee;
-    const name = j.Identifier.check(callee.property) && callee.property.name;
+    const name = this._getMethodName(j, method);
     if (name && jQueryToNativeDomMap[name]) {
       const domName = jQueryToNativeDomMap[name];
-      if (jQueryToNativeDomProp[name]) {
+      if (name === "is") {
+        const arg = node.arguments[0];
+        const prop = j.Literal.check(arg) && arg.value;
+        const callee = j.MemberExpression.check(node.callee) && node.callee;
+        method.replace(
+          j.memberExpression(callee.object, j.identifier(`${prop}`))
+        );
+      } else if (jQueryToNativeDomProp[name]) {
+        const callee = j.MemberExpression.check(node.callee) && node.callee;
         method.replace(
           j.memberExpression(callee.object, j.identifier(domName))
         );
@@ -65,36 +70,37 @@ export = class JqueryTransformer {
 
   private static replaceWithNativeDom(
     j: JSCodeshift,
-    path: ASTPath<CallExpression>
+    path: ASTPath<CallExpression>,
   ) {
-    const methods = getThis$ExpressionChainedMethodExpressions(j, path);
+    const methods = getExpressionChainedMethods(j, path);
     methods.forEach(method => this.replaceThis$Method(j, method));
     return path.node;
   }
 
-  private _$: Collection<any>;
-  private _empty$: Collection<any>;
-  private _selector$: Collection<any>;
+  private static _getMethodName(j: JSCodeshift ,method: ASTPath<CallExpression>) {
+    const { node } = method;
+    const callee = j.MemberExpression.check(node.callee) && node.callee;
+    return j.Identifier.check(callee.property) && callee.property.name;
+  }
 
-  private constructor(root: Collection<File>) {
-    this._findThis$(root);
+  private _$: Collection<any>;
+
+  private constructor(
+    root: Collection<File>,
+  ) {
     this._transform(root);
   }
 
   private _transform(root: Collection<File>) {
     const j = JqueryTransformer.j;
+    this._$ = root
+      .find(j.CallExpression)
+      .filter(path => isThis$CallExpression(j, path.node));
     if (this._$.size()) {
       this._$.replaceWith(path => JqueryTransformer.buildThisElement(j, path));
       this._$.replaceWith(path =>
         JqueryTransformer.replaceWithNativeDom(j, path)
       );
     }
-  }
-
-  private _findThis$(root: Collection<File>) {
-    const j = JqueryTransformer.j;
-    this._$ = root
-      .find(j.CallExpression)
-      .filter(path => isThis$CallExpression(j, path.node));
   }
 };

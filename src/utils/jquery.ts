@@ -30,7 +30,7 @@ export function getThis$ExpressionArguments(
   return (this$ && this$.arguments) || [];
 }
 
-export function getThis$ExpressionChainedMethodExpressions(
+export function getExpressionChainedMethods(
   j: JSCodeshift,
   path: ASTPath<CallExpression>
 ): ASTPath<CallExpression>[] {
