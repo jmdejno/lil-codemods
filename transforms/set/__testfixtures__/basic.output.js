@@ -1,4 +1,4 @@
-import { get, set } from "@ember/object/computed";
+import { get, set } from "@ember/object";
 function hello() {
   set(this, "whyNot", "1");
   const okay = 1;

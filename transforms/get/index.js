@@ -6,6 +6,6 @@ module.exports = function transformer(file, api) {
 
   const root = j(file.source);
 
-  MethodTransformer.transform(j, root, "get", "@ember/object/computed");
+  MethodTransformer.transform(j, root, "get", "@ember/object");
   return root.toSource({ quotes: "single" });
 };

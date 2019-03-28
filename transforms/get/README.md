@@ -37,7 +37,7 @@ function hello() {
 
 **Output** (<small>[basic.output.js](transforms/get/__testfixtures__/basic.output.js)</small>):
 ```js
-import { get } from "@ember/object/computed";
+import { get } from "@ember/object";
 function hello() {
   get(this, "whyNot");
   const okay = get(this, "okay");

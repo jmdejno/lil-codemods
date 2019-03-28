@@ -37,7 +37,7 @@ function hello() {
 
 **Output** (<small>[basic.output.js](transforms/get-properties/__testfixtures__/basic.output.js)</small>):
 ```js
-import { getProperties } from "@ember/object/computed";
+import { getProperties } from "@ember/object";
 function hello() {
   const { whyNot } = getProperties(this, "whyNot");
   const { okay: ok } = getProperties(this, "okay");

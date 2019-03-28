@@ -28,7 +28,7 @@ lil-codemods run set path/of/files/ or/some**/*glob.js
 
 **Input** (<small>[basic.input.js](transforms/set/__testfixtures__/basic.input.js)</small>):
 ```js
-import { get } from "@ember/object/computed";
+import { get } from "@ember/object";
 function hello() {
   this.set("whyNot", "1");
   const okay = 1;
@@ -39,7 +39,7 @@ function hello() {
 
 **Output** (<small>[basic.output.js](transforms/set/__testfixtures__/basic.output.js)</small>):
 ```js
-import { get, set } from "@ember/object/computed";
+import { get, set } from "@ember/object";
 function hello() {
   set(this, "whyNot", "1");
   const okay = 1;
