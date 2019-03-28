@@ -1,4 +1,5 @@
 # lil-codemods
+[![npm version](https://badge.fury.io/js/lil-codemods.svg)](https://badge.fury.io/js/lil-codemods)
 
 A collection of codemods for Ember.
 
