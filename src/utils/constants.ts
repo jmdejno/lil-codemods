@@ -65,7 +65,6 @@ export enum emberSingleLineObjectMethods {
   UNIQ_BY = "uniqBy"
 }
 
-
 /**
  * Preferred order of lifecycle hooks
  */
@@ -84,3 +83,14 @@ export const lifecycleHookOrder: emberLifecycleHooks[] = [
   emberLifecycleHooks.DID_DESTROY_ELEMENT,
   emberLifecycleHooks.RESET_CONTROLLER
 ];
+
+export const jQueryToNativeDomMap = {
+  find: "querySelector",
+  text: "textContent"
+}
+
+export const jQueryToNativeDomProp = {
+  find: false,
+  text: true
+}
+

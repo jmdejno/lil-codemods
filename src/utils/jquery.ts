@@ -3,7 +3,8 @@ import {
   ASTPath,
   CallExpression,
   MemberExpression,
-  ThisExpression
+  ThisExpression,
+  Identifier
 } from "jscodeshift";
 
 /**
@@ -11,39 +12,62 @@ import {
  * @param j {JSCodeshift}
  * @param path
  */
-export function isThis$CallExpression(
+export function isThis$CallExpression(j: JSCodeshift, node: CallExpression) {
+  return (
+    j.CallExpression.check(node) &&
+    j.MemberExpression.check(node.callee) &&
+    j.ThisExpression.check(node.callee.object) &&
+    j.Identifier.check(node.callee.property) &&
+    node.callee.property.name === "$"
+  );
+}
+
+export function getThis$ExpressionArguments(
   j: JSCodeshift,
   path: ASTPath<CallExpression>
 ) {
-  return !!getThis$Expression(j, path);
-};
-
-export function getThis$ExpressionArguments(j: JSCodeshift, path: ASTPath<CallExpression>) {
-  const this$ = getThis$Expression(j, path);
-  return this$.arguments || [];
+  const this$ = getThis$Expression(j, path.node);
+  return (this$ && this$.arguments) || [];
 }
 
-export function getThis$ExpressionChainedMethods(j: JSCodeshift, path: ASTPath<CallExpression>) {
-  const this$ = getThis$Expression(j, path);
-}
-
-export function getThis$Expression(j:JSCodeshift, path: ASTPath<CallExpression | MemberExpression>): CallExpression {
-  const { node } = path;
-  let curr = node;
+export function getThis$ExpressionChainedMethodExpressions(
+  j: JSCodeshift,
+  path: ASTPath<CallExpression>
+): ASTPath<CallExpression>[] {
+  const expressions = [];
+  let curr = path.parent;
   while (curr) {
+    const { node } = curr;
     if (
-      j.CallExpression.check(curr) &&
-      j.MemberExpression.check(curr.callee) &&
-      j.ThisExpression.check(curr.callee.object) &&
-      j.Identifier.check(curr.callee.property) &&
-      curr.callee.property.name === "$"
+      j.CallExpression.check(node) &&
+      j.MemberExpression.check(node.callee) &&
+      j.Identifier.check(node.callee.property)
     ) {
-      return curr
+      expressions.push(curr);
+    }
+    const parent = curr.parent;
+    curr =
+      j.CallExpression.check(parent.node) ||
+      j.MemberExpression.check(parent.node)
+        ? parent
+        : null;
+  }
+  return expressions;
+}
+
+export function getThis$Expression(
+  j: JSCodeshift,
+  node: CallExpression
+): CallExpression {
+  let curr = node as any;
+  while (curr) {
+    if (isThis$CallExpression(j, curr)) {
+      return curr;
     }
     curr = j.MemberExpression.check(curr)
-      ? j.CallExpression.check(curr.object) && curr.object
+      ? curr.object
       : j.CallExpression.check(curr)
-      ? j.MemberExpression.check(curr.callee) && curr.callee
+      ? curr.callee
       : null;
   }
 }
