@@ -1,24 +1,27 @@
 # lil-codemods
 
-
-A collection of codemod's for lil-codemods.
+A collection of codemods for Ember.
 
 ## Usage
 
 To run a specific codemod from this project, you would run the following:
 
 ```
-npx lil-codemods <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
+npx lil-codemods run
 
 # or
 
 yarn global add lil-codemods
-lil-codemods <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
+lil-codemods run
 ```
 
 ## Transforms
 
 <!--TRANSFORMS_START-->
+* [component-property-ordering](transforms/component-property-ordering/README.md)
+* [get](transforms/get/README.md)
+* [get-properties](transforms/get-properties/README.md)
+* [set](transforms/set/README.md)
 <!--TRANSFORMS_END-->
 
 ## Contributing
