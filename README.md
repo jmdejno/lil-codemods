@@ -23,6 +23,7 @@ lil-codemods run
 * [get-properties](transforms/get-properties/README.md)
 * [jquery](transforms/jquery/README.md)
 * [set](transforms/set/README.md)
+* [unused-imports](transforms/unused-imports/README.md)
 <!--TRANSFORMS_END-->
 
 ## Contributing

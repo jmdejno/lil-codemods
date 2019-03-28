@@ -1,13 +1,12 @@
 const { getParser } = require("codemod-cli").jscodeshift;
-const { getOptions } = require("codemod-cli");
-const JqueryTransformer = require("../../dist/transformers/jquery");
+const ImportTransformer = require("../../dist/transformers/imports");
 
 module.exports = function transformer(file, api) {
   const j = getParser(api);
-  const options = getOptions() || {};
 
   const root = j(file.source);
 
-  JqueryTransformer.transform(j, root, options.include);
+  const transformer = ImportTransformer.build(j, root);
+  transformer.removeUnused();
   return root.toSource({ quotes: "single" });
 };
