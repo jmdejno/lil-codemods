@@ -1,17 +1,17 @@
 {
   "name": "lil-codemods",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "repository": {
     "url": "https://github.com/jmdejno/lil-codemods.git"
   },
   "scripts": {
-    "build": "yarn clean && tsc && chmod -R 775 ./dist/bin",
+    "build": "yarn clean && tsc",
     "clean": "rm -rf dist",
     "test": "codemod-cli test",
     "update-docs": "codemod-cli update-docs",
     "watch": "tsc -w",
     "dryrun": "jscodeshift -d -p -t ",
-    "prepack": "yarn build",
+    "prepack": "yarn build && yarn update-docs",
     "prepublishOnly": "yarn test"
   },
   "bin": "dist/bin/cli.js",
