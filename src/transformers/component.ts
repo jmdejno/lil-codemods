@@ -16,7 +16,7 @@ import {
 } from "../utils/helpers";
 import { sortNodesByAccessLevel, sortNodesByArray } from "../utils/sort";
 
-export = class Component {
+export class Component {
   //#region public statics
 
   public static build(j: JSCodeshift, root: Collection<File>): Component {
