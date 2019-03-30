@@ -1,6 +1,6 @@
 {
   "name": "lil-codemods",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "repository": {
     "url": "https://github.com/jmdejno/lil-codemods.git"
   },
@@ -12,7 +12,7 @@
     "watch": "tsc -w",
     "dryrun": "jscodeshift -d -p -t ",
     "prepack": "yarn build",
-    "prepublishOnly" : "yarn test"
+    "prepublishOnly": "yarn test"
   },
   "bin": "dist/bin/cli.js",
   "main": "dist/index.js",
