@@ -1,18 +1,26 @@
 {
   "name": "lil-codemods",
-  "version": "0.2.3",
+  "version": "0.2.6",
   "repository": {
     "url": "https://github.com/jmdejno/lil-codemods.git"
   },
   "scripts": {
-    "build": "yarn clean && tsc && chmod -R 775 ./dist/bin",
+    "build": "yarn clean && tsc",
     "clean": "rm -rf dist",
     "test": "codemod-cli test",
     "update-docs": "codemod-cli update-docs",
     "watch": "tsc -w",
-    "dryrun": "jscodeshift -d -p -t "
+    "dryrun": "jscodeshift -d -p -t ",
+    "prepack": "yarn build && yarn update-docs",
+    "prepublishOnly": "yarn test"
   },
-  "bin": "./dist/bin/cli.js",
+  "bin": "dist/bin/cli.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "transforms/**/*"
+  ],
   "keywords": [
     "codemod-cli"
   ],
@@ -23,7 +31,6 @@
     "inquirer": "^6.2.2",
     "inquirer-path": "^1.0.0-beta5",
     "jscodeshift": "^0.6.3",
-    "typescript": "^3.3.4000",
     "yargs": "^13.2.2"
   },
   "devDependencies": {
@@ -32,7 +39,8 @@
     "@types/inquirer": "^6.0.0",
     "@types/jscodeshift": "^0.6.0",
     "@types/yargs": "^12.0.10",
-    "jest": "^24.1.0"
+    "jest": "^24.1.0",
+    "typescript": "^3.3.4000"
   },
   "jest": {
     "testEnvironment": "node"

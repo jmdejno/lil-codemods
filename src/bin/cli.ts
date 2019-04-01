@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import * as yargs from 'yargs';
+import * as yargs from "yargs";
 
 yargs
   .locale("en")
@@ -7,4 +7,3 @@ yargs
   .demandCommand()
   .help()
   .parse();
-

@@ -14,7 +14,7 @@ interface IJqueryTransformerOptions {
   include: string[];
 }
 
-export = class JqueryTransformer {
+export class JqueryTransformer {
   public static transform(
     j: JSCodeshift,
     root: Collection<File>,

@@ -1,7 +1,7 @@
 import { JSCodeshift, ObjectProperty, ObjectMethod, File, ASTPath, ImportDeclaration, ImportSpecifier } from "jscodeshift";
 import { Collection } from "jscodeshift/src/Collection";
 
-export = class ImportTransformer {
+export class ImportTransformer {
 
   public static build(j: JSCodeshift, root: Collection<File>) {
     this.j = j;

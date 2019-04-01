@@ -2,7 +2,7 @@ import { Collection } from "jscodeshift/src/Collection";
 import { JSCodeshift, CallExpression, ASTPath } from "jscodeshift";
 import { ensureImport } from "../utils/imports";
 
-export = class MethodTransformer {
+export class MethodTransformer {
 
   public static transform(j: JSCodeshift, root: Collection<any>, method: string, importSource: string) {
     ensureImport(j, root, method, importSource);
